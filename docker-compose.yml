@@ -10,14 +10,14 @@ networks:
 
 services:
   eventbus:
-    image: micheal65536/vienna:eventbus-latest
+    image: vienna/vienna-eventbus-latest
     hostname: eventbus
     networks:
       - internal_network
     restart: unless-stopped
 
   objectstore:
-    image: micheal65536/vienna:objectstore-latest
+    image: vienna/vienna-objectstore-latest
     hostname: objectstore
     networks:
       - internal_network
@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
 
   apiserver:
-    image: micheal65536/vienna:apiserver-latest
+    image: vienna/vienna-apiserver-latest
     command: -eventbus eventbus -objectstore objectstore
     hostname: apiserver
     networks:
@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
 
   buildplate-launcher:
-    image: micheal65536/vienna:buildplate-launcher-latest
+    image: vienna/vienna-buildplate-launcher-latest
     command: -eventbus eventbus -publicAddress ${ADDRESS}
     hostname: buildplate-launcher
     networks:
@@ -57,7 +57,7 @@ services:
     restart: unless-stopped
 
   tappablesgenerator:
-    image: micheal65536/vienna:tappablesgenerator-latest
+    image: vienna/vienna-tappablesgenerator-latest
     command: -eventbus eventbus
     hostname: tappablesgenerator
     networks:
@@ -70,7 +70,7 @@ services:
     restart: unless-stopped
 
   cdn:
-    image: micheal65536/vienna:utils-cdn-latest
+    image: vienna/vienna-utils-cdn-latest
     hostname: cdn
     networks:
       - external_network
@@ -81,7 +81,7 @@ services:
     restart: unless-stopped
 
   locator:
-    image: micheal65536/vienna:utils-locator-latest
+    image: vienna/vienna-utils-locator-latest
     command: -playfabTitleId 20CA2 -api http://${ADDRESS}:${API_PORT}/ -cdn http://${ADDRESS}:${CDN_PORT}/
     hostname: locator
     networks:
@@ -91,7 +91,7 @@ services:
     restart: unless-stopped
 
   buildplate-importer:
-    image: micheal65536/vienna:utils-tools-buildplate-importer-latest
+    image: vienna/vienna-utils-tools-buildplate-importer-latest
     command: -eventbus eventbus -objectstore objectstore -worldFile /world/world -playerId ${BUILDPLATE_IMPORTER_PLAYER_ID}
     hostname: buildplate-importer
     networks:
