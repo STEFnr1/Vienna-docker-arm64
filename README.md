@@ -1,1 +1,1 @@
-Follow the Vienna guide in order to set this up. Before running the `up` script, make sure to run the `first_run` script in order for the images to be compiled.
+Follow the Vienna guide in order to set this up. Before running the `up` script, make sure to run the `first_run` script in order for the images to be compiled. This only needs to be done the first time Vienna is installed, not every time the server starts.
