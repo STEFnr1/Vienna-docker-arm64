@@ -1,14 +1,15 @@
-FROM alpine:3.19.1 AS java
+FROM ubuntu:24.04 AS java
+RUN apt-get update; apt-get install -y wget tar
 WORKDIR /java
-RUN wget -O - https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.11%2B9/OpenJDK17U-jdk_x64_alpine-linux_hotspot_17.0.11_9.tar.gz | gunzip | tar -x --strip-components=1
+RUN wget -O - https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.14%2B7/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.14_7.tar.gz | gunzip | tar -x --strip-components=1
 ENV PATH=/java/bin:$PATH
 
 FROM ubuntu:24.04 AS java-build
 RUN apt-get update; apt-get install -y wget
 WORKDIR /java-17
-RUN wget -O - https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.11%2B9/OpenJDK17U-jdk_x64_linux_hotspot_17.0.11_9.tar.gz | gunzip | tar -x --strip-components=1
+RUN wget -O - https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.14%2B7/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.14_7.tar.gz | gunzip | tar -x --strip-components=1
 WORKDIR /java-8
-RUN wget -O - https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u412-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u412b08.tar.gz | gunzip | tar -x --strip-components=1
+RUN wget -O - https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u442-b06/OpenJDK8U-jdk_aarch64_linux_hotspot_8u442b06.tar.gz | gunzip | tar -x --strip-components=1
 
 FROM java-build AS build
 WORKDIR /fountain
